@@ -1,0 +1,243 @@
+{
+  "meta": {
+    "version": "1.0.0",
+    "lastEdited": "2026-09-29T09:00:00Z"
+  },
+  "theme": {
+    "accent": "#FF3B0F",
+    "dark": "#0B0B0B",
+    "light": "#EDEDEB",
+    "card": "#FFFFFF",
+    "grey": "#8C8C8C",
+    "fontDisplay": "\"Neue Haas Grotesk Display Pro\", \"Inter Tight\", \"Helvetica Neue\", Arial, sans-serif",
+    "fontBody": "\"Neue Haas Grotesk Text Pro\", \"Inter Tight\", \"Helvetica Neue\", Arial, sans-serif",
+    "radius": 24
+  },
+  "seo": {
+    "lang": "en",
+    "title": "[NAME] Studio | Branding, Websites & Growth",
+    "description": "We build branding, websites, apps and companies that actually move the needle for growing brands.",
+    "ogImage": "assets/og-image.svg"
+  },
+  "brand": {
+    "name": "[NAME]",
+    "suffix": "Studio",
+    "mark": "®",
+    "tagline": "We build branding, websites, apps and companies that actually move the needle for growing brands.",
+    "email": "hello@namestudio.co",
+    "location": "New York, NY",
+    "timezone": "America/New_York",
+    "availability": {
+      "active": true,
+      "label": "Available for new project"
+    }
+  },
+  "nav": {
+    "links": [
+      { "label": "Story", "href": "#story" },
+      { "label": "Work", "href": "#work" },
+      { "label": "Services", "href": "#services" },
+      { "label": "Process", "href": "#process" },
+      { "label": "FAQ", "href": "#faq" },
+      { "label": "Contact", "href": "#cta" }
+    ]
+  },
+  "hero": {
+    "image": {
+      "src": "assets/hero.jpg",
+      "alt": "Motion-blurred portrait lit in warm red light",
+      "width": 1600,
+      "height": 1000,
+      "placeholder": "radial-gradient(80% 90% at 60% 40%, #3a1208 0%, #0B0B0B 70%)"
+    },
+    "headline1": "Name",
+    "headline2": "studio",
+    "descriptor": "We build branding, websites, apps and companies that actually move the needle for growing brands.",
+    "cta": { "label": "Start a project", "href": "mailto:hello@namestudio.co" },
+    "rating": {
+      "score": 4.9,
+      "source": "Google",
+      "label": "Based on Google Reviews"
+    },
+    "copyright": "©2026"
+  },
+  "story": {
+    "label": "Our story",
+    "founder": {
+      "name": "Alex Morgan",
+      "title": "Founder & Creative Director",
+      "avatar": {
+        "src": "assets/avatar.svg",
+        "alt": "Portrait of Alex Morgan",
+        "width": 96,
+        "height": 96,
+        "placeholder": "linear-gradient(135deg, #FF3B0F, #0B0B0B)"
+      }
+    },
+    "statement": "A small, senior team of designers, developers and strategists. We partner with founders to turn ambitious ideas into brands people remember",
+    "statementMuted": "and businesses that keep growing.",
+    "button": { "label": "About us", "href": "#services" }
+  },
+  "proof": {
+    "label": "Proof",
+    "stat": {
+      "label": "Client retention",
+      "value": 98,
+      "suffix": "%",
+      "caption": "of clients return for a second project or refer us to a friend."
+    },
+    "testimonial": {
+      "quote": "They rebuilt our brand and site in eight weeks. Inbound leads doubled the following quarter, and the team finally feels proud to share our story.",
+      "name": "Jordan Lee",
+      "company": "CEO, Halcyon Health"
+    },
+    "logosLabel": "Trusted by",
+    "logos": [
+      { "name": "Norrland", "src": "" },
+      { "name": "Lumen&Co", "src": "" },
+      { "name": "Arcadia", "src": "" },
+      { "name": "Halcyon", "src": "" },
+      { "name": "Vesper", "src": "" },
+      { "name": "Oakline", "src": "" }
+    ]
+  },
+  "work": {
+    "label": "Selected work",
+    "heading": "Recent projects",
+    "projects": [
+      {
+        "id": "halcyon",
+        "title": "Halcyon Health",
+        "category": "Brand identity · Website",
+        "year": "2026",
+        "href": "#work",
+        "image": {
+          "src": "",
+          "alt": "Halcyon Health brand identity preview",
+          "width": 1200,
+          "height": 900,
+          "placeholder": "radial-gradient(120% 90% at 20% 10%, #FF7A52 0%, #FF3B0F 35%, #2A0A03 100%)"
+        }
+      },
+      {
+        "id": "vesper",
+        "title": "Vesper Coffee",
+        "category": "Packaging · E-commerce",
+        "year": "2026",
+        "href": "#work",
+        "image": {
+          "src": "",
+          "alt": "Vesper Coffee packaging preview",
+          "width": 1200,
+          "height": 900,
+          "placeholder": "conic-gradient(from 210deg at 70% 40%, #EDEDEB, #C9C4BA, #6E665A, #EDEDEB)"
+        }
+      },
+      {
+        "id": "norrland",
+        "title": "Norrland Outdoor",
+        "category": "Campaign · Social",
+        "year": "2025",
+        "href": "#work",
+        "image": {
+          "src": "",
+          "alt": "Norrland Outdoor campaign preview",
+          "width": 1200,
+          "height": 900,
+          "placeholder": "linear-gradient(160deg, #1B2A22 0%, #3F5A45 45%, #C9D2B8 100%)"
+        }
+      },
+      {
+        "id": "arcadia",
+        "title": "Arcadia Finance",
+        "category": "Product design · App",
+        "year": "2025",
+        "href": "#work",
+        "image": {
+          "src": "",
+          "alt": "Arcadia Finance app preview",
+          "width": 1200,
+          "height": 900,
+          "placeholder": "radial-gradient(90% 90% at 80% 80%, #3B5BFF 0%, #16163A 55%, #0B0B0B 100%)"
+        }
+      }
+    ]
+  },
+  "services": {
+    "label": "Services",
+    "heading": "What we do",
+    "items": [
+      { "title": "Brand identity", "description": "Strategy, naming, logo systems, typography and guidelines built to scale with you." },
+      { "title": "Websites", "description": "Fast, editorial marketing sites designed to convert and easy for your team to update." },
+      { "title": "Apps & product", "description": "UX, UI and design systems for web and mobile products, from first prototype to launch." },
+      { "title": "Growth marketing", "description": "Campaigns, content and performance creative that turn attention into revenue." }
+    ]
+  },
+  "process": {
+    "label": "Process",
+    "heading": "How we work",
+    "steps": [
+      { "title": "Discover", "description": "Workshops, research and audits to find what makes you worth choosing." },
+      { "title": "Define", "description": "Positioning, messaging and a clear plan with scope, timeline and success metrics." },
+      { "title": "Design", "description": "Focused rounds of exploration and refinement, shared early and often." },
+      { "title": "Deliver", "description": "Build, launch and hand-off, with support as you grow into the new brand." }
+    ]
+  },
+  "faq": {
+    "label": "FAQ",
+    "heading": "Questions, answered",
+    "items": [
+      { "q": "How long does a typical project take?", "a": "Brand identities run 4–6 weeks. A brand plus website is usually 8–12 weeks, depending on scope and content." },
+      { "q": "What does a project cost?", "a": "Projects typically start at $15k. After a short intro call we send a fixed quote, so there are no surprises." },
+      { "q": "Do you work with early-stage startups?", "a": "Yes. We have packages for pre-seed and seed teams that need to look credible fast without overbuilding." },
+      { "q": "Can we update the website ourselves?", "a": "Always. Every site ships with an easy editor and a recorded walkthrough for your team." },
+      { "q": "Where are you based?", "a": "Our studio is in New York, and we work with clients across North America and Europe." }
+    ]
+  },
+  "cta": {
+    "label": "Contact",
+    "headline": "Have a project in mind? Let's make it move.",
+    "button": { "label": "Start a project", "href": "mailto:hello@namestudio.co" }
+  },
+  "footer": {
+    "links": [
+      { "label": "Work", "href": "#work" },
+      { "label": "Services", "href": "#services" },
+      { "label": "Process", "href": "#process" },
+      { "label": "FAQ", "href": "#faq" }
+    ],
+    "socials": [
+      { "label": "Instagram", "href": "https://instagram.com/" },
+      { "label": "LinkedIn", "href": "https://linkedin.com/" },
+      { "label": "Dribbble", "href": "https://dribbble.com/" },
+      { "label": "X", "href": "https://x.com/" }
+    ],
+    "legal": "© 2026 [NAME] Studio. All rights reserved."
+  },
+  "ui": {
+    "skipToContent": "Skip to content",
+    "menuOpen": "Open menu",
+    "menuClose": "Close menu",
+    "menuTitle": "Menu",
+    "localTime": "Local time in",
+    "ratingOutOf": "{score} out of 5 stars",
+    "counter": "(+ {n})",
+    "motif": "/////",
+    "viewProject": "View project",
+    "backToTop": "Back to top",
+    "footerLinksTitle": "Sitemap",
+    "footerSocialsTitle": "Follow",
+    "footerContactTitle": "Say hello"
+  },
+  "sections": [
+    { "id": "hero", "visible": true },
+    { "id": "story", "visible": true },
+    { "id": "proof", "visible": true },
+    { "id": "work", "visible": true },
+    { "id": "services", "visible": true },
+    { "id": "process", "visible": true },
+    { "id": "faq", "visible": true },
+    { "id": "cta", "visible": true },
+    { "id": "footer", "visible": true }
+  ]
+}

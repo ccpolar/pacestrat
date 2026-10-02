@@ -1,0 +1,290 @@
+{
+  "meta": {
+    "version": "1.1.0",
+    "lastEdited": "2026-09-30T13:30:00Z",
+    "source": "Copy taken from https://www.pacestrat.com/ (September 2026)"
+  },
+  "theme": {
+    "accent": "#EF4136",
+    "dark": "#0B0B0B",
+    "light": "#EFEFED",
+    "card": "#FFFFFF",
+    "grey": "#8A8A8A",
+    "fontDisplay": "\"Neue Haas Grotesk Display Pro\", \"Inter Tight\", \"Helvetica Neue\", Arial, sans-serif",
+    "fontBody": "\"Neue Haas Grotesk Text Pro\", \"Inter Tight\", \"Helvetica Neue\", Arial, sans-serif",
+    "radius": 24
+  },
+  "seo": {
+    "lang": "en",
+    "title": "Pace Strategies — Media Buying & Growth Consulting",
+    "description": "Pace Strategies is a media buying and growth consulting agency. Paid media, email/SMS, and strategy that turns ad spend into revenue. 6.2 average ROAS.",
+    "ogImage": "assets/og-image.png"
+  },
+  "brand": {
+    "logo": "assets/pace-logo.svg",
+    "logoMark": "assets/pace-mark.svg",
+    "name": "Pace",
+    "suffix": "Strategies",
+    "mark": "©",
+    "tagline": "Small dinner table. Everybody eats.",
+    "email": "info@pacestrat.com",
+    "location": "",
+    "timezone": "",
+    "availability": {
+      "active": true,
+      "label": "The next seat at the table is open"
+    }
+  },
+  "nav": {
+    "links": [
+      { "label": "Pricing", "href": "#pricing" },
+      { "label": "Results", "href": "#proof" },
+      { "label": "Case studies", "href": "#work" },
+      { "label": "Services", "href": "#services" },
+      { "label": "Process", "href": "#process" },
+      { "label": "Why Pace", "href": "#why" },
+      { "label": "FAQs", "href": "#faq" },
+      { "label": "Contact", "href": "#cta" },
+      { "label": "Book a call", "href": "https://calendly.com/taylor-pacestrat/30min" }
+    ]
+  },
+  "hero": {
+    "image": {
+      "src": "assets/hero.jpg",
+      "alt": "Motion-blurred portrait lit in warm red light",
+      "width": 1600,
+      "height": 1000,
+      "placeholder": "radial-gradient(80% 90% at 60% 40%, #3a1208 0%, #0B0B0B 70%)"
+    },
+    "wordmarkStyle": "logo",
+    "headline1": "Pace",
+    "headline2": "strategies",
+    "descriptor": "Marketing that sets the pace. Small dinner table, big plates. Your account is run by a founder, not passed down a chain.",
+    "cta": { "label": "Book a free strategy call", "href": "https://calendly.com/taylor-pacestrat/30min" },
+    "rating": { "show": false, "score": 0, "source": "", "label": "" },
+    "copyright": "©2026 Pace Strategies"
+  },
+  "pricing": {
+    "label": "Pricing",
+    "heading": "Performance-based pricing",
+    "statement": "We grow when you grow. We don't believe in flat retainers disconnected from results. Our model aligns our success with yours.",
+    "statementMuted": "We scale when you scale.",
+    "note": {
+      "title": "Why we don't price like a traditional agency",
+      "body": "Our pricing is built around performance, profitability, and measurable progress. When you are profitable, we participate in the upside. When growth slows, we adjust."
+    },
+    "button": { "label": "See the results", "href": "#proof" }
+  },
+  "proof": {
+    "label": "Results",
+    "stat": {
+      "label": "Client results",
+      "prefix": "$",
+      "value": 25,
+      "suffix": "M+",
+      "caption": "Spent in ad spend. We don't sell impressions. We sell revenue.",
+      "more": [
+        { "value": "34%", "label": "Average CAC reduction" },
+        { "value": "40%", "label": "ROAS improvement in over 3 months" },
+        { "value": "30%", "label": "Contribution margin improvement" }
+      ]
+    },
+    "testimonial": {
+      "quote": "Black Friday is when most ad accounts get expensive. Ours got efficient.",
+      "name": "Case Study 002",
+      "company": "Classified: Top Secret · November 2025"
+    },
+    "logosLabel": "Platforms we run",
+    "logos": [
+      { "name": "Meta", "src": "" },
+      { "name": "TikTok", "src": "" },
+      { "name": "Google", "src": "" },
+      { "name": "YouTube", "src": "" },
+      { "name": "Pinterest", "src": "" },
+      { "name": "Klaviyo", "src": "" }
+    ]
+  },
+  "work": {
+    "label": "Case studies",
+    "heading": "Receipts, not promises",
+    "intro": "The sharpie stays on the website — our clients' names are confidential here. On a call, the whole file opens: brand names, full decks, screenshots, strategy.",
+    "projects": [
+      {
+        "id": "case-study-001",
+        "title": "$4K months → $250K months in under a year",
+        "category": "Case study 001 · Classified: Redacted™",
+        "year": "2024–now",
+        "href": "https://calendly.com/taylor-pacestrat/30min",
+        "image": {
+          "src": "",
+          "alt": "Case study 001 cover",
+          "width": 1200,
+          "height": 900,
+          "placeholder": "radial-gradient(120% 90% at 20% 10%, #EE7A5E 0%, #EF4136 38%, #2A0A03 100%)"
+        }
+      },
+      {
+        "id": "case-study-002",
+        "title": "Every $1 on Google came back as $47.",
+        "category": "Case study 002 · Classified: Top Secret",
+        "year": "Nov 2025",
+        "href": "https://calendly.com/taylor-pacestrat/30min",
+        "image": {
+          "src": "",
+          "alt": "Case study 002 cover",
+          "width": 1200,
+          "height": 900,
+          "placeholder": "conic-gradient(from 210deg at 70% 40%, #EFEFED, #CFCFCB, #6E6E6A, #EFEFED)"
+        }
+      },
+      {
+        "id": "case-study-003",
+        "title": "$4.7M in 8 months — from before the first drop.",
+        "category": "Case study 003 · Classified: Need to know",
+        "year": "8 months",
+        "href": "https://calendly.com/taylor-pacestrat/30min",
+        "image": {
+          "src": "",
+          "alt": "Case study 003 cover",
+          "width": 1200,
+          "height": 900,
+          "placeholder": "linear-gradient(160deg, #0B0B0B 0%, #3A1810 50%, #EF4136 100%)"
+        }
+      },
+      {
+        "id": "case-study-004",
+        "title": "Three years in — and sales just jumped 479%.",
+        "category": "Case study 004 · Classified: Eyes only",
+        "year": "Year 3",
+        "href": "https://calendly.com/taylor-pacestrat/30min",
+        "image": {
+          "src": "",
+          "alt": "Case study 004 cover",
+          "width": 1200,
+          "height": 900,
+          "placeholder": "radial-gradient(90% 90% at 80% 80%, #8A8A8A 0%, #2B2B2B 55%, #0B0B0B 100%)"
+        }
+      }
+    ]
+  },
+  "services": {
+    "label": "Services",
+    "heading": "Five ways we set the pace",
+    "items": [
+      {
+        "title": "Paid media buying",
+        "description": "Full-funnel campaign management across every major platform. We plan, launch, test, and scale — obsessing over creative, audiences, and ROAS so you don't have to.",
+        "tags": "Meta · TikTok · Google · YouTube · Pinterest"
+      },
+      {
+        "title": "Email & SMS",
+        "description": "The highest-margin revenue channel you're probably underusing. Flows, campaigns, and list growth that turned into $250K for one client last year.",
+        "tags": "Klaviyo · Flows · Campaigns · List growth"
+      },
+      {
+        "title": "Growth consulting",
+        "description": "Already have a team? We'll audit your account, fix what's leaking, and build the strategy. Senior-level thinking without the agency retainer.",
+        "tags": "Account audits · Growth strategy · In-house training · Forecasting"
+      },
+      {
+        "title": "Creative production",
+        "description": "The creative is the targeting. We produce the ads, content, and campaign assets that stop thumbs and convert — built for the platforms they run on.",
+        "tags": "Ad creative · Photo / video · UGC · Content systems"
+      },
+      {
+        "title": "Energy creation",
+        "description": "Paid ads work harder when the brand has momentum. We engineer hype around your drops and launches — organic social, seeding, and community that make people care before they're targeted.",
+        "tags": "Launch & drop strategy · Organic social · Influencer seeding · Community"
+      }
+    ]
+  },
+  "story": {
+    "label": "Our motto",
+    "founder": {
+      "name": "",
+      "title": "",
+      "avatar": { "src": "", "alt": "", "width": 96, "height": 96, "placeholder": "" }
+    },
+    "statement": "We have a small dinner table — doesn't mean we don't want you to eat.",
+    "statementMuted": "A boutique roster, on purpose. Fewer clients, more attention, everybody eats.",
+    "button": { "label": "Pull up a chair", "href": "https://calendly.com/taylor-pacestrat/30min" }
+  },
+  "process": {
+    "label": "Process",
+    "heading": "From first call to first win",
+    "steps": [
+      { "title": "Audit", "description": "We tear down your ad accounts, email flows, and funnel. You get a written breakdown of what's working, what's leaking, and what it's costing you." },
+      { "title": "Build", "description": "Strategy, creative direction, tracking, and campaign structure — rebuilt for scale before a dollar of new spend goes live." },
+      { "title": "Launch", "description": "Campaigns go live with disciplined testing. Weekly reporting in plain English: spend, revenue, ROAS. No vanity metrics." },
+      { "title": "Scale", "description": "Winners get budget. Losers get cut. We compound what works across paid media and email/SMS until growth is boring and predictable." }
+    ]
+  },
+  "why": {
+    "label": "Why Pace",
+    "heading": "Built different, on purpose",
+    "items": [
+      { "title": "A small dinner table", "description": "We keep the client roster deliberately short. Your account is handled directly by a founder or partner — the people on the sales call are the people running your spend." },
+      { "title": "Revenue, not reports", "description": "We're judged on ROAS and gross sales — the same numbers you're judged on. If we don't move them, fire us." },
+      { "title": "No long contracts", "description": "Month-to-month. We keep clients by performing, not by locking them in." },
+      { "title": "Full-stack growth", "description": "Paid media, email/SMS, creative, and strategy under one roof — every channel feeding the next, every dollar accounted for. When one team owns the whole funnel, there's nobody to blame and nowhere to hide. We prefer it that way." }
+    ]
+  },
+  "faq": {
+    "label": "FAQs",
+    "heading": "Your questions, answered with clarity",
+    "items": [
+      { "q": "Who is Pace best suited for?", "a": "We'll work with anyone — all we ask for is full commitment and trust. Growth is a partnership, not a hand-off. Our specialty is e-commerce: apparel, streetwear, and DTC brands that live and die by drops, ROAS, and repeat customers." },
+      { "q": "What makes Pace different from other agencies?", "a": "The small dinner table. Your account is handled by a founder or partner — never passed down a chain of account managers — and our performance-based pricing means we only eat when you do." },
+      { "q": "What results can we realistically expect?", "a": "The bare minimum we expect is a 3.5 ROAS. We'll give you an honest range for your brand after the audit." },
+      { "q": "How does your pricing work?", "a": "Performance-based, not flat retainers. Pricing scales with scope and ad spend, and our upside is tied to yours — when growth slows, we adjust. The audit call is free and you'll leave with value either way." },
+      { "q": "Do you require long-term contracts?", "a": "No. Everything is month-to-month. Our retention strategy is performance." },
+      { "q": "How quickly can we get started?", "a": "Audit within a week of the first call. Campaigns typically live within 2–3 weeks depending on creative and tracking setup." }
+    ]
+  },
+  "cta": {
+    "label": "Contact",
+    "headline": "Ready to set the pace?",
+    "body": "One free 30-minute call. We'll look at your numbers, tell you what we'd do, and you decide if it's a fit. Worst case: free advice.",
+    "button": { "label": "Book your free strategy call", "href": "https://calendly.com/taylor-pacestrat/30min" }
+  },
+  "footer": {
+    "links": [
+      { "label": "Pricing", "href": "#pricing" },
+      { "label": "Results", "href": "#proof" },
+      { "label": "Case studies", "href": "#work" },
+      { "label": "Services", "href": "#services" },
+      { "label": "Process", "href": "#process" },
+      { "label": "FAQs", "href": "#faq" }
+    ],
+    "socials": [],
+    "legal": "© 2026 Pace Strategies"
+  },
+  "ui": {
+    "skipToContent": "Skip to content",
+    "menuOpen": "Open menu",
+    "menuClose": "Close menu",
+    "menuTitle": "Menu",
+    "localTime": "Local time in",
+    "ratingOutOf": "{score} out of 5 stars",
+    "counter": "(+ {n})",
+    "motif": "/////",
+    "viewProject": "Book a call to see the full case study",
+    "backToTop": "Back to top",
+    "footerLinksTitle": "Sitemap",
+    "footerSocialsTitle": "Follow",
+    "footerContactTitle": "Say hello"
+  },
+  "sections": [
+    { "id": "hero", "visible": true },
+    { "id": "pricing", "visible": true },
+    { "id": "proof", "visible": true },
+    { "id": "work", "visible": true },
+    { "id": "services", "visible": true },
+    { "id": "story", "visible": true },
+    { "id": "process", "visible": true },
+    { "id": "why", "visible": true },
+    { "id": "faq", "visible": true },
+    { "id": "cta", "visible": true },
+    { "id": "footer", "visible": true }
+  ]
+}

@@ -1,0 +1,15 @@
+[build]
+  # Applies pending migrations, then builds. The public page and /content.json
+  # are prerendered, so `next build` needs the database schema to already
+  # exist — see DEPLOY.md "First deploy" before connecting this site.
+  command = "npm run migrate && npm run build"
+  publish = ".next"
+
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
+
+[build.environment]
+  # Payload connects to the database and S3 bucket during `next build`
+  # (globals/types are resolved at build time), so DATABASE_URI, PAYLOAD_SECRET
+  # and the S3_* vars must be set in Netlify's dashboard, not just at runtime.
+  NODE_VERSION = "20"
