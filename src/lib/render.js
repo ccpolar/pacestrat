@@ -393,10 +393,34 @@ export function renderPage(C) {
   const visible = new Set(list.map((x) => x.id))
   const body = list.filter((x) => x.id !== 'footer')
 
+  /* Loading screen. The markup ships with the page so it can cover the first
+     paint, but the frames carry no src: site.js only promotes data-src once it
+     has decided the intro actually runs, so a visit that skips it (a repeat
+     visit, reduced motion, no images) downloads none of these. */
+  const intro = () => {
+    const L = C.loading || {}
+    const imgs = L.images || []
+    if (!L.enabled || !imgs.length) return ''
+    const frames = imgs.map((im, i) => {
+      const set = (im.sources || []).map((s) => `${url(s.url)} ${+s.width}w`).concat(`${url(im.src)} ${+im.width}w`).join(', ')
+      return `<img data-src="${url(im.src)}" data-srcset="${esc(set)}" sizes="100vw" alt="" style="--i:${i}">`
+    }).join('')
+    return `
+    <div class="intro" id="intro" data-frame="${+L.frameMs || 500}" aria-hidden="true">
+      <div class="intro__frames">${frames}</div>
+      <div class="intro__shade" style="background:${/^#[0-9a-f]{3,6}$/i.test(L.overlayColor) ? L.overlayColor : '#0B0B0B'};opacity:${Math.min(Math.max(+L.overlayOpacity || 0, 0), 0.9)}"></div>
+      <div class="intro__mark">${hasLogo
+        ? logoImg(brand.logo, 'intro__logo', '')
+        : `<span class="intro__name">${esc(fullName)}</span>`}</div>
+      <button type="button" class="intro__skip" data-intro-skip>Skip</button>
+    </div>`
+  }
+
   return (
+    intro() +
     `<div class="backdrop" aria-hidden="true"></div>` +
     `<a class="skip" href="#main">${esc(ui.skipToContent)}</a>` +
-    `<div class="frame" id="app">` +
+    `<div class="frame" id="app" data-site-content>` +
       topbar(body[0] && body[0].id === 'hero') +
       `<main id="main" tabindex="-1">${visible.has('hero') ? '' : `<h1 class="sr">${esc(fullName)}</h1>`}` +
       body.map((x) => R[x.id]()).join('') +

@@ -9,7 +9,7 @@ import sharp from 'sharp'
 
 import { Media, Projects, Users } from './collections'
 import { Cta, Faq, Footer, Hero, Pricing, Process, Proof, Services, Story, Why, Work } from './globals/sections'
-import { Brand, Layout, Theme } from './globals/settings'
+import { Brand, Layout, Loading, Theme } from './globals/settings'
 
 const dirname = path.dirname(fileURLToPath(import.meta.url))
 
@@ -44,7 +44,7 @@ export default buildConfig({
     },
   },
   collections: [Projects, Media, Users],
-  globals: [Hero, Pricing, Proof, Work, Services, Story, Process, Why, Faq, Cta, Footer, Brand, Theme, Layout],
+  globals: [Hero, Pricing, Proof, Work, Services, Story, Process, Why, Faq, Cta, Footer, Brand, Theme, Layout, Loading],
   db: isPostgres
     ? postgresAdapter({ pool: { connectionString: databaseURI }, push: true })
     : sqliteAdapter({ client: { url: databaseURI } }),

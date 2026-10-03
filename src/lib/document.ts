@@ -40,6 +40,19 @@ export function renderDocument(C: Content, origin: string) {
   ${hero ? `<link rel="preload" as="image" href="${url(hero)}"${heroSrcset ? ` imagesrcset="${heroSrcset}" imagesizes="100vw"` : ''} fetchpriority="high">` : ''}
   <link rel="stylesheet" href="/styles.css">
   <script src="/site.js" defer></script>
+  ${
+    C.loading?.enabled && (C.loading?.images || []).length
+      ? `<script>/* Decides before first paint, so the overlay is never seen half-applied
+     and a visit that skips it never pays for it. Once per visit, and never
+     when the visitor has asked for reduced motion. */
+(function(){try{
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  if (sessionStorage.getItem('intro') === 'seen') return;
+  sessionStorage.setItem('intro','seen');
+  document.documentElement.setAttribute('data-intro','run');
+}catch(e){}})()</script>`
+      : ''
+  }
 </head>
 <body>
 ${renderPage(C)}

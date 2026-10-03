@@ -64,6 +64,17 @@ export const mappers: Record<string, (d: Doc) => Content> = {
       ogImage: media(d.seo?.ogImage)?.url ?? '',
     },
   }),
+  loading: (d) => ({
+    loading: {
+      enabled: Boolean(d.enabled),
+      frameMs: d.frameMs ?? 500,
+      overlayColor: d.overlayColor ?? '#0B0B0B',
+      overlayOpacity: (d.overlayOpacity ?? 55) / 100,
+      images: (d.images ?? [])
+        .map((row: Doc) => image({ media: row.image }, 1600, 1000))
+        .filter((im: Doc) => im.src),
+    },
+  }),
   theme: (d) => ({
     theme: {
       accent: d.accent,

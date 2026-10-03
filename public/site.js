@@ -150,11 +150,59 @@
     }
   }
 
+  /* ---------- Loading screen ----------
+     Only runs when the inline head script set html[data-intro=run]: once per
+     visit, never under reduced motion. Frames are promoted from data-src here,
+     so no intro image is fetched on a visit that does not play it. */
+
+  const PRELOAD_CAP = 3000;  // never hold a visitor on a cover longer than this
+
+  function intro() {
+    const root = d.documentElement;
+    const el = d.getElementById('intro');
+    if (!el || root.getAttribute('data-intro') !== 'run') { if (el) el.remove(); return; }
+
+    const frames = [...el.querySelectorAll('.intro__frames img')];
+    const frameMs = +el.dataset.frame || 500;
+    const content = d.querySelector('[data-site-content]');
+    let finished = false;
+
+    const release = () => {
+      if (finished) return;
+      finished = true;
+      root.removeAttribute('data-intro');
+      if (content) content.inert = false;
+      el.classList.add('is-leaving');
+      // Remove only after the fade, so the last frame does not blink away.
+      setTimeout(() => el.remove(), 700);
+    };
+
+    if (content) content.inert = true;
+    el.classList.add('is-active');
+    el.querySelector('[data-intro-skip]').addEventListener('click', release);
+    d.addEventListener('keydown', (e) => { if (e.key === 'Escape') release(); }, { once: true });
+
+    // Decode everything up front so no frame pops in mid-sequence.
+    frames.forEach((img) => { img.srcset = img.dataset.srcset || ''; img.src = img.dataset.src; });
+    const decoded = Promise.all(frames.map((img) => img.decode().then(() => img, () => null)));
+    const capped = new Promise((r) => setTimeout(() => r('timeout'), PRELOAD_CAP));
+
+    Promise.race([decoded, capped]).then((result) => {
+      if (finished) return;
+      const usable = result === 'timeout' ? [] : result.filter(Boolean);
+      if (!usable.length) return release();   // nothing decoded in time: get out of the way
+      el.style.setProperty('--frame', frameMs + 'ms');
+      el.style.setProperty('--run', usable.length * frameMs + 'ms');
+      el.classList.add('is-running');
+      setTimeout(release, usable.length * frameMs);
+    });
+  }
+
   /* ---------- Boot ---------- */
 
   function init() {
     io.splice(0).forEach((o) => o.disconnect());
-    bind(); clock(); reveals(); counters();
+    bind(); intro(); clock(); reveals(); counters();
     if (!reduced) parallax();
     entrance();
   }

@@ -262,3 +262,66 @@ export const Layout = siteGlobal({
     },
   ],
 })
+
+export const Loading = siteGlobal({
+  slug: 'loading',
+  label: 'Loading screen',
+  group: 'Site',
+  description:
+    'The intro that plays over the first page of a visit: your images flash by under a dark tint while the logo grows, then it fades to the site. It plays once per visit, never for visitors who have reduced motion turned on, and it stays hidden until at least one image is added.',
+  fields: [
+    {
+      name: 'enabled',
+      label: 'Show the loading screen',
+      type: 'checkbox',
+      defaultValue: false,
+      admin: { description: 'Nothing shows until this is ticked and at least one image is added below.' },
+    },
+    {
+      name: 'frameMs',
+      label: 'Time on each image (milliseconds)',
+      type: 'number',
+      defaultValue: 500,
+      min: 150,
+      max: 1500,
+      admin: {
+        description: '1000 = one second. Lower is faster. The logo grows across the whole run, so it keeps pace.',
+        step: 50,
+      },
+    },
+    {
+      type: 'row',
+      fields: [
+        {
+          name: 'overlayColor',
+          label: 'Tint colour',
+          type: 'text',
+          defaultValue: '#0B0B0B',
+          validate: validHex,
+          admin: { width: '50%', components: { Field: '@/components/admin/ColorField#ColorField' } },
+        },
+        {
+          name: 'overlayOpacity',
+          label: 'Tint strength (%)',
+          type: 'number',
+          defaultValue: 55,
+          min: 0,
+          max: 90,
+          admin: { width: '50%', description: '0 shows the photos untouched.', step: 5 },
+        },
+      ],
+    },
+    {
+      name: 'images',
+      type: 'array',
+      maxRows: 10,
+      admin: {
+        description:
+          'Up to 10, shown in this order — drag to reorder. Landscape photos at least 2000px wide look sharpest; they fill the screen and are cropped to fit.',
+        initCollapsed: true,
+        components: { RowLabel: '@/components/admin/RowLabel#RowLabel' },
+      },
+      fields: [{ name: 'image', type: 'upload', relationTo: 'media', required: true }],
+    },
+  ],
+})

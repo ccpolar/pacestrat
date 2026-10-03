@@ -45,7 +45,7 @@ export async function Nav({ payload, user }: Props) {
         g('footer'),
       ],
     },
-    { title: 'Settings', items: [g('brand'), g('theme'), g('layout'), c('media'), c('users')] },
+    { title: 'Settings', items: [g('loading'), g('brand'), g('theme'), g('layout'), c('media'), c('users')] },
   ]
 
   let avatar: string | null = null

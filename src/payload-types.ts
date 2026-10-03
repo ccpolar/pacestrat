@@ -104,6 +104,7 @@ export interface Config {
     brand: Brand;
     theme: Theme;
     layout: Layout;
+    loading: Loading;
   };
   globalsSelect: {
     hero: HeroSelect<false> | HeroSelect<true>;
@@ -120,6 +121,7 @@ export interface Config {
     brand: BrandSelect<false> | BrandSelect<true>;
     theme: ThemeSelect<false> | ThemeSelect<true>;
     layout: LayoutSelect<false> | LayoutSelect<true>;
+    loading: LoadingSelect<false> | LoadingSelect<true>;
   };
   locale: null;
   widgets: {
@@ -1460,6 +1462,40 @@ export interface Layout {
   createdAt?: string | null;
 }
 /**
+ * The intro that plays over the first page of a visit: your images flash by under a dark tint while the logo grows, then it fades to the site. It plays once per visit, never for visitors who have reduced motion turned on, and it stays hidden until at least one image is added.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "loading".
+ */
+export interface Loading {
+  id: number;
+  /**
+   * Nothing shows until this is ticked and at least one image is added below.
+   */
+  enabled?: boolean | null;
+  /**
+   * 1000 = one second. Lower is faster. The logo grows across the whole run, so it keeps pace.
+   */
+  frameMs?: number | null;
+  overlayColor?: string | null;
+  /**
+   * 0 shows the photos untouched.
+   */
+  overlayOpacity?: number | null;
+  /**
+   * Up to 10, shown in this order — drag to reorder. Landscape photos at least 2000px wide look sharpest; they fill the screen and are cropped to fit.
+   */
+  images?:
+    | {
+        image: number | Media;
+        id?: string | null;
+      }[]
+    | null;
+  _status?: ('draft' | 'published') | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "hero_select".
  */
@@ -1817,6 +1853,26 @@ export interface LayoutSelect<T extends boolean = true> {
         localTime?: T;
         viewProject?: T;
         ratingOutOf?: T;
+      };
+  _status?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "loading_select".
+ */
+export interface LoadingSelect<T extends boolean = true> {
+  enabled?: T;
+  frameMs?: T;
+  overlayColor?: T;
+  overlayOpacity?: T;
+  images?:
+    | T
+    | {
+        image?: T;
+        id?: T;
       };
   _status?: T;
   updatedAt?: T;
