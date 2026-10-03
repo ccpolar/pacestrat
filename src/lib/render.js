@@ -30,11 +30,18 @@ const link = (l, cls = '', inner = esc(l && l.label)) =>
   l ? `<a class="${cls}" href="${url(l.href)}"${ext(l.href)}>${inner}</a>` : ''
 
 // Image object → <img> (lazy, explicit size) or gradient placeholder.
-const media = (im = {}, cls, eager) => {
+const media = (im = {}, cls, eager, sizesAttr) => {
   const w = +im.width || 4, h = +im.height || 3
   const a11y = im.alt ? `role="img" aria-label="${esc(im.alt)}"` : 'aria-hidden="true"'
   if (im.src) {
-    return `<img class="${cls}" src="${url(im.src)}" alt="${esc(im.alt)}" width="${w}" height="${h}" ` +
+    // srcset from the WebP variants Payload generated, with the original as
+    // the last candidate so a browser without WebP still has something to use.
+    const set = (im.sources || [])
+      .map((s) => `${url(s.url)} ${+s.width}w`)
+      .concat(`${url(im.src)} ${w}w`)
+      .join(', ')
+    const srcset = (im.sources || []).length ? ` srcset="${set}" sizes="${esc(sizesAttr || '100vw')}"` : ''
+    return `<img class="${cls}" src="${url(im.src)}" alt="${esc(im.alt)}" width="${w}" height="${h}"${srcset} ` +
       (eager ? 'fetchpriority="high" decoding="async"' : 'loading="lazy" decoding="async"') + '>'
   }
   return `<div class="${cls} ph" ${a11y} style="aspect-ratio:${w}/${h};background:${grad(im.placeholder)}"></div>`
@@ -114,7 +121,7 @@ export function renderPage(C) {
       const logoWordmark = h.wordmarkStyle === 'logo' && hasLogo
       return `
       <section class="hero on-dark" id="hero" aria-labelledby="hero-h">
-        <div class="hero__media" data-parallax>${media(h.image, 'hero__img', true)}</div>
+        <div class="hero__media" data-parallax>${media(h.image, 'hero__img', true, '100vw')}</div>
         <div class="hero__shade" aria-hidden="true"></div>
         <div class="hero__inner">
           <div class="hero__aside">
@@ -150,7 +157,7 @@ export function renderPage(C) {
         <div class="story__grid">
           ${f.name ? `
           <div class="founder" data-reveal>
-            ${media(f.avatar, 'founder__img')}
+            ${media(f.avatar, 'founder__img', false, '48px')}
             <div><p class="founder__name">${esc(f.name)}</p><p class="founder__title">${esc(f.title)}</p></div>
           </div>` : '<span></span>'}
           <div class="story__body">
@@ -209,7 +216,7 @@ export function renderPage(C) {
           <li class="project" id="project-${esc(p.id)}" data-reveal style="--d:${(i % 2) * 0.1}s">
             <a class="project__link" href="${url(p.href)}"${ext(p.href)}>
               <div class="project__media">
-                ${media(p.image, 'project__img')}
+                ${media(p.image, 'project__img', false, '(max-width: 768px) 92vw, 46vw')}
                 <span class="project__arrow" aria-hidden="true">${I.diag}</span>
               </div>
               <div class="project__meta">

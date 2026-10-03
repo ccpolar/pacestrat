@@ -13,6 +13,12 @@ const abs = (origin: string, u: string) => (!u || /^https?:/i.test(u) ? u : orig
 export function renderDocument(C: Content, origin: string) {
   const seo = C.seo || {}
   const hero = C.hero?.image?.src
+  /* Preload the same candidate list the <img> offers, so the browser fetches
+     the variant it will actually use instead of the full-size original. */
+  const heroSources = (C.hero?.image?.sources || []) as { url: string; width: number }[]
+  const heroSrcset = heroSources.length
+    ? esc(heroSources.map((s) => `${s.url} ${s.width}w`).concat(`${hero} ${C.hero.image.width}w`).join(', '))
+    : ''
   return `<!doctype html>
 <html lang="${esc(seo.lang || 'en')}" style="${esc(themeVars(C))}">
 <head>
@@ -31,7 +37,7 @@ export function renderDocument(C: Content, origin: string) {
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link id="font-css" rel="stylesheet" href="${FONTS}" media="print" onload="this.media='all'">
   <noscript><link rel="stylesheet" href="${FONTS}"></noscript>
-  ${hero ? `<link rel="preload" as="image" href="${url(hero)}" fetchpriority="high">` : ''}
+  ${hero ? `<link rel="preload" as="image" href="${url(hero)}"${heroSrcset ? ` imagesrcset="${heroSrcset}" imagesizes="100vw"` : ''} fetchpriority="high">` : ''}
   <link rel="stylesheet" href="/styles.css">
   <script src="/site.js" defer></script>
 </head>

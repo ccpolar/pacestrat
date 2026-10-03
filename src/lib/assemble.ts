@@ -7,7 +7,26 @@ export type Content = Record<string, any>
 
 const media = (m: unknown): Doc | null => (m && typeof m === 'object' ? (m as Doc) : null)
 
-/** imageSlot group → { src, alt, width, height, placeholder } */
+/** The WebP variants Payload generates on upload, smallest first, as
+ *  [{ url, width }] ready for a srcset. Absent for SVG and for images smaller
+ *  than the smallest variant, in which case the original is used alone. */
+const variants = (m: Doc | null) => {
+  const byWidth = new Map<number, { url: string; width: number }>()
+  for (const s of Object.values((m?.sizes ?? {}) as Record<string, Doc>)) {
+    // withoutEnlargement clamps every variant wider than the source to the
+    // source width, so several entries can share one width. A srcset with
+    // repeated descriptors is malformed, and the duplicates are byte-identical.
+    if (s?.url && s?.width && !byWidth.has(s.width as number)) {
+      byWidth.set(s.width as number, { url: s.url as string, width: s.width as number })
+    }
+  }
+  // The original is appended as the final candidate by the renderer; drop any
+  // variant that merely matches it in width.
+  const orig = m?.width as number | undefined
+  return [...byWidth.values()].filter((v) => !orig || v.width < orig).sort((a, b) => a.width - b.width)
+}
+
+/** imageSlot group → { src, alt, width, height, placeholder, sources } */
 const image = (slot: Doc | undefined, w: number, h: number) => {
   const m = media(slot?.media)
   return {
@@ -16,6 +35,7 @@ const image = (slot: Doc | undefined, w: number, h: number) => {
     width: m?.width || w,
     height: m?.height || h,
     placeholder: slot?.placeholder ?? '',
+    sources: variants(m),
   }
 }
 

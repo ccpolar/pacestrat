@@ -79,6 +79,16 @@ export const Media: CollectionConfig = {
   upload: {
     staticDir: 'media',
     mimeTypes: ['image/*'],
+    // Variants only: the original upload is left untouched, so the social
+    // share image stays a PNG (several platforms still reject WebP) and SVG
+    // logos stay vector. The page picks a variant per device via srcset and
+    // falls back to the original where no variant exists.
+    imageSizes: [
+      { name: 'sm', width: 640, withoutEnlargement: true, formatOptions: { format: 'webp', options: { quality: 74 } } },
+      { name: 'md', width: 1280, withoutEnlargement: true, formatOptions: { format: 'webp', options: { quality: 72 } } },
+      { name: 'lg', width: 1920, withoutEnlargement: true, formatOptions: { format: 'webp', options: { quality: 70 } } },
+      { name: 'xl', width: 2560, withoutEnlargement: true, formatOptions: { format: 'webp', options: { quality: 68 } } },
+    ],
   },
   hooks: { afterChange: [revalidateDoc], afterDelete: [revalidateDelete] },
   fields: [
