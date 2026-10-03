@@ -546,7 +546,10 @@ main:focus { outline: none; }
   .status, .where__place { display: none; }
   .hero__inner { grid-template-columns: 1fr; grid-template-areas: "word" "aside" "foot"; }
   .story__grid { grid-template-columns: 1fr; }
-  .work__grid { grid-template-columns: 1fr; }
+  /* minmax(0, …), never a bare 1fr: the implied `auto` minimum is the card's
+     min-content width, which lets a card grow the column past its container
+     and push the whole grid off the right edge. */
+  .work__grid { grid-template-columns: minmax(0, 1fr); }
   .service { grid-template-columns: 2.25rem minmax(0, 1fr); }
   .service__desc, .service__tags { grid-column: 2; }
   .why__grid { grid-template-columns: 1fr; }
@@ -579,20 +582,14 @@ main:focus { outline: none; }
    Content-driven breakpoint: below ~560px the desktop habit of
    reserving a left column for ordinals costs more than it gives. */
 @media (max-width: 560px) {
-  /* Project card: the year was fighting the title for width and
-     wrapping mid-word ("2024–/now"). Title takes the full line,
-     then category and year share the one below. */
-  .project__meta {
-    /* minmax(0, …) not 1fr: a bare 1fr floors at min-content, which lets a
-       long title push the grid wider than the card it sits in. */
-    display: grid; grid-template-columns: minmax(0, 1fr) auto;
-    align-items: baseline; column-gap: 1rem; row-gap: .2rem;
-  }
+  /* Project card: the year fought the title for width and wrapped mid-word
+     ("2024-/now"). Plain flex-wrap rather than grid with display:contents:
+     the title block takes the whole line, the year wraps beneath it. Nothing
+     here has a min-content floor, so it cannot widen the card. */
+  .project__meta { flex-wrap: wrap; align-items: baseline; gap: .2rem 1rem; }
+  .project__meta > div { flex: 1 1 100%; min-width: 0; }
+  .project__year { margin-left: auto; }
   .project__title, .project__cat { min-width: 0; overflow-wrap: anywhere; }
-  .project__meta > div { display: contents; }
-  .project__title { grid-column: 1 / -1; }
-  .project__cat { grid-column: 1; }
-  .project__year { grid-column: 2; justify-self: end; }
 
   /* Services: the ordinal keeps its place beside the title, but the
      description spans the full width instead of sitting in a column
