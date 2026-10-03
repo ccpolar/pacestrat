@@ -583,9 +583,12 @@ main:focus { outline: none; }
      wrapping mid-word ("2024–/now"). Title takes the full line,
      then category and year share the one below. */
   .project__meta {
-    display: grid; grid-template-columns: 1fr auto;
+    /* minmax(0, …) not 1fr: a bare 1fr floors at min-content, which lets a
+       long title push the grid wider than the card it sits in. */
+    display: grid; grid-template-columns: minmax(0, 1fr) auto;
     align-items: baseline; column-gap: 1rem; row-gap: .2rem;
   }
+  .project__title, .project__cat { min-width: 0; overflow-wrap: anywhere; }
   .project__meta > div { display: contents; }
   .project__title { grid-column: 1 / -1; }
   .project__cat { grid-column: 1; }
@@ -652,4 +655,18 @@ main:focus { outline: none; }
   /* Underline the footer links permanently: the hover-reveal underline
      was the only thing marking them as links, and it never fires. */
   .footer ul a { background-size: 100% 1px; opacity: .85; }
+}
+
+/* ---------- Horizontal overflow safety net ----------
+   `overflow: clip` needs Safari 16+. Older iOS ignores it outright, so
+   anything wider than the frame escapes and scrolls the whole document
+   sideways — the page then reads as "cut off on the right" even though
+   every element is individually the right size.
+
+   `hidden` is used instead of `clip` only at <=1024px, because `hidden`
+   makes the frame a scroll container and would stop the sticky section
+   headings working; those are static below this breakpoint anyway. */
+@media (max-width: 1024px) {
+  html, body { overflow-x: hidden; }
+  .frame { overflow: hidden; max-width: 100%; }
 }
