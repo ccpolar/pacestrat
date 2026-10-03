@@ -17,7 +17,7 @@ export function renderDocument(C: Content, origin: string) {
 <html lang="${esc(seo.lang || 'en')}" style="${esc(themeVars(C))}">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>${esc(seo.title)}</title>
   <meta name="description" content="${esc(seo.description)}">
   <meta name="theme-color" content="${esc(C.theme?.dark || '#0B0B0B')}">

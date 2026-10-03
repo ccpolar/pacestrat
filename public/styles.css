@@ -92,9 +92,14 @@ main:focus { outline: none; }
   position: relative;
   /* No max-width: the side gaps stay equal to the top gap at every width.
      A cap here would be absorbed by the auto margins and show up as side
-     gaps far wider than the top one on large monitors. */
-  width: calc(100% - var(--gap) * 2);
-  margin: var(--gap) auto;
+     gaps far wider than the top one on large monitors.
+     env() is 0 where there's no notch, so this is exactly `var(--gap)` on
+     desktop; on a notched phone the frame backs off far enough to clear the
+     Dynamic Island / home indicator while the blurred backdrop stays
+     edge-to-edge behind it. */
+  --frame-side: max(var(--gap), env(safe-area-inset-left, 0px), env(safe-area-inset-right, 0px));
+  width: calc(100% - var(--frame-side) * 2);
+  margin: max(var(--gap), env(safe-area-inset-top, 0px)) auto max(var(--gap), env(safe-area-inset-bottom, 0px));
   background: var(--light);
   border-radius: var(--radius);
   overflow: clip;
@@ -561,4 +566,90 @@ main:focus { outline: none; }
   .hero__foot { flex-direction: column; align-items: flex-start; }
   .btn { width: 100%; justify-content: space-between; }
   .story__body .btn, .cta__row .btn { width: auto; }
+}
+
+/* =============================================================
+   19. Mobile & touch adaptation
+   Adaptation, not scaling: the phone layout reclaims horizontal
+   space the desktop grid can afford to spend, and every affordance
+   that relied on hover gets a press state instead.
+   ============================================================= */
+
+/* ---------- Narrow phones: reclaim horizontal space ----------
+   Content-driven breakpoint: below ~560px the desktop habit of
+   reserving a left column for ordinals costs more than it gives. */
+@media (max-width: 560px) {
+  /* Project card: the year was fighting the title for width and
+     wrapping mid-word ("2024–/now"). Title takes the full line,
+     then category and year share the one below. */
+  .project__meta {
+    display: grid; grid-template-columns: 1fr auto;
+    align-items: baseline; column-gap: 1rem; row-gap: .2rem;
+  }
+  .project__meta > div { display: contents; }
+  .project__title { grid-column: 1 / -1; }
+  .project__cat { grid-column: 1; }
+  .project__year { grid-column: 2; justify-self: end; }
+
+  /* Services: the ordinal keeps its place beside the title, but the
+     description spans the full width instead of sitting in a column
+     indented ~68px from the edge. */
+  .service { grid-template-columns: auto minmax(0, 1fr); gap: .3rem .75rem; }
+  .service__desc, .service__tags { grid-column: 1 / -1; }
+
+}
+
+/* ---------- Landscape phones ----------
+   The hero's 640px floor is taller than the whole viewport when the
+   phone is on its side, so the first screen becomes a dead zone. */
+@media (orientation: landscape) and (max-height: 540px) {
+  .hero { min-height: calc(100svh - var(--gap) * 2); }
+  .hero__inner { padding-top: clamp(4rem, 14vh, 6rem); }
+  .menu__panel { padding-block: 1rem; }
+  .menu__links a { font-size: clamp(1.5rem, 6vh, 2.25rem); }
+}
+
+/* ---------- Touch input ----------
+   Keyed to the pointer, not the screen: a touchscreen laptop gets
+   these too, and a small window on a desktop doesn't. */
+@media (pointer: coarse) {
+  /* 44px minimum tap target. These were 20–27px tall: real links
+     people are expected to hit with a thumb. */
+  .footer__top-link,
+  .cta__mail,
+  .menu__email,
+  .status__email {
+    display: inline-flex; align-items: center; min-height: 44px;
+  }
+  /* Full-width rows: "FAQs" is only 36px of text, but the whole row
+     should accept the tap, the way a native list does. */
+  .footer ul a { display: flex; align-items: center; width: 100%; min-height: 44px; }
+  .footer ul { gap: 0; }
+
+  /* Small print has to stay legible in the hand, not just on a desk.
+     Keyed to touch rather than width so tablets get it too. */
+  .service__tags, .copy, .footer__bottom { font-size: .875rem; }
+  .logo { display: inline-flex; align-items: center; min-height: 44px; }
+
+  /* Spread the footer columns out so adjacent links aren't a coin flip. */
+  .footer__top { row-gap: 2.5rem; }
+}
+
+/* ---------- No hover available ----------
+   Every hover affordance on this page is decorative except the project
+   arrow (already handled above). What touch lacks is press feedback,
+   so add it rather than leaving taps feeling inert. */
+@media (hover: none) {
+  html { -webkit-tap-highlight-color: color-mix(in srgb, var(--accent) 18%, transparent); }
+
+  .btn, .project__link, .qa summary, .studio-link,
+  .footer ul a, .menu__links a, .logos__grid li {
+    transition: transform .18s var(--ease), opacity .18s var(--ease);
+  }
+  .btn:active, .project__link:active, .menu__links a:active { transform: scale(.985); }
+  .qa summary:active, .footer ul a:active { opacity: .6; }
+
+  /* Underline the footer links permanently: the hover-reveal underline
+     was the only thing marking them as links, and it never fires. */
+  .footer ul a { background-size: 100% 1px; opacity: .85; }
 }
