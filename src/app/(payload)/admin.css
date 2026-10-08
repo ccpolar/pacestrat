@@ -5,7 +5,14 @@
    unlayered rules win without extra specificity.
    ============================================================= */
 
-@import url('https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&display=swap');
+/* The admin uses the same self-hosted face as the public site. */
+@font-face {
+  font-family: "Inter Tight";
+  src: url("/fonts/inter-tight-latin.woff2") format("woff2");
+  font-weight: 400 700;
+  font-style: normal;
+  font-display: swap;
+}
 
 /* ---------- 1. Tokens ---------- */
 html[data-theme='dark'] {

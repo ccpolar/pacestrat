@@ -14,7 +14,7 @@
 import config from '@payload-config'
 import { getPayload } from 'payload'
 
-const write = process.argv.includes('--write')
+const write = process.argv.includes('--write') || process.env.WRITE === '1'
 const payload = await getPayload({ config })
 
 const all = await payload.find({ collection: 'media', limit: 500, pagination: false, depth: 0 })

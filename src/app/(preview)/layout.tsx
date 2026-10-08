@@ -2,7 +2,6 @@ import type { Metadata } from 'next'
 
 export const metadata: Metadata = { title: 'Preview', robots: { index: false, follow: false } }
 
-const FONTS = 'https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&display=swap'
 
 /** Same head as the public page (src/lib/document.ts), for the admin's live-preview pane. */
 export default function PreviewLayout({ children }: { children: React.ReactNode }) {
@@ -10,11 +9,14 @@ export default function PreviewLayout({ children }: { children: React.ReactNode 
     <html lang="en" suppressHydrationWarning>
       <head>
         <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
-        <link id="font-css" rel="stylesheet" href={FONTS} />
+        <link rel="preload" as="font" type="font/woff2" href="/fonts/inter-tight-latin.woff2" crossOrigin="anonymous" />
         <link rel="stylesheet" href="/styles.css" />
         <script src="/site.js" defer />
       </head>
-      <body>{children}</body>
+      {/* site.js drives this DOM directly (theme vars, is-ready, reveal
+          classes) and now that the font is preloaded it can fire before React
+          finishes hydrating, so these attributes legitimately differ. */}
+      <body suppressHydrationWarning>{children}</body>
     </html>
   )
 }

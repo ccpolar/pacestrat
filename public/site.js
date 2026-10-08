@@ -113,11 +113,10 @@
       d.body.classList.add('is-ready');
       d.querySelectorAll('.hero [data-reveal]').forEach((el) => el.classList.add('is-in'));
     });
-    const css = d.getElementById('font-css');
-    const sheet = !css || css.media === 'all' ? Promise.resolve()
-      : new Promise((r) => css.addEventListener('load', r, { once: true }));
+    // The font is self-hosted and preloaded now, so there is no stylesheet
+    // request to wait on first — just the face itself.
     const family = getComputedStyle(d.documentElement).getPropertyValue('--font-display') || 'sans-serif';
-    const font = sheet.then(() => d.fonts && d.fonts.load('500 1em ' + family));
+    const font = d.fonts ? d.fonts.load('500 1em ' + family) : Promise.resolve();
     Promise.race([font, new Promise((r) => setTimeout(r, 800))]).then(ready, ready);
   }
 

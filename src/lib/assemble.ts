@@ -20,11 +20,15 @@ const variants = (m: Doc | null) => {
       byWidth.set(s.width as number, { url: s.url as string, width: s.width as number })
     }
   }
-  // The original is appended as the final candidate by the renderer; drop any
-  // variant that merely matches it in width.
-  const orig = m?.width as number | undefined
-  return [...byWidth.values()].filter((v) => !orig || v.width < orig).sort((a, b) => a.width - b.width)
+  return [...byWidth.values()].sort((a, b) => a.width - b.width)
 }
+
+/** True when the original is wider than every variant, so it is worth offering
+ *  as the top candidate. When a variant already covers the source width the
+ *  original must be left out: it is the same pixels in a far heavier format,
+ *  and a browser picking it undoes the whole point of generating variants. */
+const originalIsWidest = (m: Doc | null, v: { width: number }[]) =>
+  !v.length || (typeof m?.width === 'number' && m.width > v[v.length - 1].width)
 
 /** imageSlot group → { src, alt, width, height, placeholder, sources } */
 const image = (slot: Doc | undefined, w: number, h: number) => {
@@ -36,6 +40,7 @@ const image = (slot: Doc | undefined, w: number, h: number) => {
     height: m?.height || h,
     placeholder: slot?.placeholder ?? '',
     sources: variants(m),
+    useOriginalInSrcset: originalIsWidest(m, variants(m)),
   }
 }
 

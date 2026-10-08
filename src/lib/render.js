@@ -38,7 +38,10 @@ const media = (im = {}, cls, eager, sizesAttr) => {
     // the last candidate so a browser without WebP still has something to use.
     const set = (im.sources || [])
       .map((s) => `${url(s.url)} ${+s.width}w`)
-      .concat(`${url(im.src)} ${w}w`)
+      // Only offer the original when no variant already covers that width,
+      // otherwise the browser picks the heavy source over an identical-size
+      // WebP and the variants achieve nothing on wide screens.
+      .concat(im.useOriginalInSrcset === false ? [] : [`${url(im.src)} ${w}w`])
       .join(', ')
     const srcset = (im.sources || []).length ? ` srcset="${set}" sizes="${esc(sizesAttr || '100vw')}"` : ''
     return `<img class="${cls}" src="${url(im.src)}" alt="${esc(im.alt)}" width="${w}" height="${h}"${srcset} ` +

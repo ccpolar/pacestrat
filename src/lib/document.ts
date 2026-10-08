@@ -1,7 +1,6 @@
 import type { Content } from './assemble'
 import { esc, renderPage, themeVars, url } from './render.js'
 
-const FONTS = 'https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&display=swap'
 
 const abs = (origin: string, u: string) => (!u || /^https?:/i.test(u) ? u : origin.replace(/\/$/, '') + u)
 
@@ -17,7 +16,12 @@ export function renderDocument(C: Content, origin: string) {
      the variant it will actually use instead of the full-size original. */
   const heroSources = (C.hero?.image?.sources || []) as { url: string; width: number }[]
   const heroSrcset = heroSources.length
-    ? esc(heroSources.map((s) => `${s.url} ${s.width}w`).concat(`${hero} ${C.hero.image.width}w`).join(', '))
+    ? esc(
+        heroSources
+          .map((s) => `${s.url} ${s.width}w`)
+          .concat(C.hero?.image?.useOriginalInSrcset === false ? [] : [`${hero} ${C.hero.image.width}w`])
+          .join(', '),
+      )
     : ''
   return `<!doctype html>
 <html lang="${esc(seo.lang || 'en')}" style="${esc(themeVars(C))}">
@@ -33,10 +37,7 @@ export function renderDocument(C: Content, origin: string) {
   ${seo.ogImage ? `<meta property="og:image" content="${url(abs(origin, seo.ogImage))}">` : ''}
   <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link id="font-css" rel="stylesheet" href="${FONTS}" media="print" onload="this.media='all'">
-  <noscript><link rel="stylesheet" href="${FONTS}"></noscript>
+  <link rel="preload" as="font" type="font/woff2" href="/fonts/inter-tight-latin.woff2" crossorigin>
   ${hero ? `<link rel="preload" as="image" href="${url(hero)}"${heroSrcset ? ` imagesrcset="${heroSrcset}" imagesizes="100vw"` : ''} fetchpriority="high">` : ''}
   <link rel="stylesheet" href="/styles.css">
   <script src="/site.js" defer></script>

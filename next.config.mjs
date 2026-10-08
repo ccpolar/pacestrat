@@ -21,6 +21,10 @@ nextConfig.headers = async () => [
     headers: [{ key: 'Cache-Control', value: 'public, max-age=31536000, s-maxage=31536000, immutable' }],
   },
   {
+    source: '/fonts/:f*',
+    headers: [{ key: 'Cache-Control', value: 'public, max-age=31536000, immutable' }],
+  },
+  {
     // The stylesheet and behaviour script have no content hash in their names,
     // so they revalidate rather than cache blind — cheap, and a deploy is picked
     // up immediately.
