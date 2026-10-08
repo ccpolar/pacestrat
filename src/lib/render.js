@@ -443,7 +443,12 @@ export function themeVars(C) {
   const map = { accent: 'accent', dark: 'dark', light: 'light', card: 'card', grey: 'grey', fontDisplay: 'font-display', fontBody: 'font-body' }
   const vars = Object.entries(map).filter(([k]) => t[k]).map(([k, v]) => `--${v}:${safeCss(t[k])}`)
   if (t.radius != null && t.radius !== '') vars.push(`--radius:${parseFloat(t.radius) || 0}px`)
-  const hero = C.hero && C.hero.image && C.hero.image.src
-  if (hero && /^[\w\-./%:]+$/.test(hero)) vars.push(`--hero-img:url("${hero}")`)
+  /* The backdrop paints this into a 12%-sized box, blurs it and scales it 10x,
+     so it is unrecognisable by the time anyone sees it. Use the smallest
+     variant: the full-size original here was the single heaviest request on
+     the page, fetched purely to be blurred away. */
+  const im = (C.hero && C.hero.image) || {}
+  const backdrop = (im.sources && im.sources.length ? im.sources[0].url : im.src) || ''
+  if (backdrop && /^[\w\-./%:]+$/.test(backdrop)) vars.push(`--hero-img:url("${backdrop}")`)
   return vars.join(';')
 }
